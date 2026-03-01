@@ -1,6 +1,6 @@
 # Obsidian Official CLI Skill
 
-Complete reference for the official Obsidian CLI (v1.12+). All 110 commands documented.
+Complete reference for the official Obsidian CLI (v1.12+). All 115 commands documented.
 
 ## What is this?
 
@@ -17,6 +17,7 @@ This skill enables OpenClaw to use **all official Obsidian CLI features**:
 - 📄 Templates (list, read, insert, resolve)
 - 🕐 History (versions, diff, restore)
 - ☁️ Sync (status, history, restore)
+- 📢 Publish (site, status, add, remove) *requires subscription*
 - 🎨 Themes (install, switch, uninstall)
 - 🔌 Plugins (install, enable, disable, reload)
 - 🪟 Workspaces (save, load, delete)
@@ -28,6 +29,7 @@ This skill enables OpenClaw to use **all official Obsidian CLI features**:
 - **Catalyst license** (paid supporter - $25 one-time)
 - **macOS** system
 - **Obsidian must be running** (CLI connects via IPC)
+- **Obsidian Publish subscription** (optional, $8/month for publish commands)
 
 ## Installation
 
@@ -95,6 +97,10 @@ obsidian history:restore file="Note" version=3
 obsidian plugins filter=community
 obsidian plugin:install id="dataview" enable
 
+# Publish (requires subscription)
+obsidian publish:status
+obsidian publish:add changed
+
 # Developer
 obsidian devtools
 obsidian eval code="app.vault.getFiles().length"
@@ -102,7 +108,7 @@ obsidian eval code="app.vault.getFiles().length"
 
 ## Complete Documentation
 
-See [SKILL.md](SKILL.md) for all 110 commands with full parameter documentation.
+See [SKILL.md](SKILL.md) for all 115 commands with full parameter documentation.
 
 ## Official vs Community CLI
 
@@ -116,10 +122,12 @@ See [SKILL.md](SKILL.md) for all 110 commands with full parameter documentation.
 | **Bases** | ✅ Query, create | ❌ Not available |
 | **History** | ✅ Versions, restore | ❌ Not available |
 | **Sync** | ✅ Control, history | ❌ Not available |
+| **Publish** | ✅ Site, status, add* | ❌ Not available |
 | **Plugins** | ✅ Install, manage | ❌ Not available |
 | **Developer Tools** | ✅ DevTools, eval | ❌ Not available |
 | **Requires Obsidian running** | ✅ Yes (IPC) | ❌ No |
 | **Requires Catalyst** | ✅ Yes ($25) | ❌ No |
+| **Requires Publish** | ⚠️ For publish:* only ($8/mo) | ❌ N/A |
 
 ## Troubleshooting
 
@@ -147,6 +155,11 @@ obsidian vault="Work" daily
 obsidian vault="Notes" search query="test"
 ```
 
+### Publish commands not working
+- Requires **Obsidian Publish subscription** ($8/month or $96/year)
+- Without subscription: `Error: Command "publish:status" not found`
+- Subscribe at: https://obsidian.md/publish
+
 ## Alternative: Direct File Editing
 
 If you don't have Catalyst license, you can still work with Obsidian vaults by editing files directly:
@@ -162,7 +175,7 @@ echo "- [ ] Task" >> ~/Documents/Obsidian\ Vault/Daily/2026-03-01.md
 grep -r "keyword" ~/Documents/Obsidian\ Vault/
 ```
 
-But you'll miss: tasks toggle, properties, bookmarks, bases, history, sync, plugins, etc.
+But you'll miss: tasks toggle, properties, bookmarks, bases, history, sync, publish, plugins, etc.
 
 ## Resources
 
@@ -177,10 +190,10 @@ But you'll miss: tasks toggle, properties, bookmarks, bases, history, sync, plug
 
 ### 这是什么？
 
-完整的 Obsidian 官方 CLI 文档（110 个命令），包括：
+完整的 Obsidian 官方 CLI 文档（115 个命令），包括：
 - 文件操作、日记、搜索、任务、标签
 - 书签、数据库、模板、历史记录
-- 同步、发布、主题、插件、工作区
+- 同步、发布（需订阅）、主题、插件、工作区
 - 开发者工具
 
 ### 前置条件
@@ -189,6 +202,7 @@ But you'll miss: tasks toggle, properties, bookmarks, bases, history, sync, plug
 - Catalyst 许可证（$25 一次性付费）
 - macOS 系统
 - Obsidian 必须运行中
+- Obsidian Publish 订阅（可选，$8/月，用于 publish 命令）
 
 ### 安装
 
@@ -229,6 +243,10 @@ obsidian base:query file="数据库" format=json
 # 历史记录
 obsidian history file="笔记"
 obsidian history:restore file="笔记" version=3
+
+# 发布（需订阅）
+obsidian publish:status
+obsidian publish:add changed
 ```
 
 详细文档见 [SKILL.md](SKILL.md)。

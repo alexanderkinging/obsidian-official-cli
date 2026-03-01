@@ -1,7 +1,7 @@
 ---
 name: obsidian-catalyst-cli
 description: |
-  Complete official Obsidian CLI reference (v1.12+). All 110 commands documented.
+  Complete official Obsidian CLI reference (v1.12+). All 115 commands documented.
   Covers files, daily notes, search, tasks, tags, properties, links, bookmarks, 
   bases, templates, history, sync, publish, themes, plugins, workspaces, and developer tools.
 homepage: https://help.obsidian.md/cli
@@ -15,7 +15,7 @@ metadata:
 
 # Obsidian Official CLI - Complete Reference
 
-**Official Obsidian CLI (v1.12+)** - Complete documentation of all 110 commands.
+**Official Obsidian CLI (v1.12+)** - Complete documentation of all 115 commands.
 
 ## Prerequisites
 
@@ -716,6 +716,62 @@ obsidian sync:deleted total
 Open sync history UI
 ```bash
 obsidian sync:open file="Note"
+```
+
+---
+
+### Publish (6 commands)
+
+⚠️ **Requires Obsidian Publish subscription** ($8/month or $96/year)
+
+These commands only work if you have an active Obsidian Publish subscription.
+
+#### publish:site
+Show publish site info
+```bash
+obsidian publish:site             # Show slug and URL
+```
+
+#### publish:list
+List published files
+```bash
+obsidian publish:list
+obsidian publish:list total       # Count only
+```
+
+#### publish:status
+List publish changes
+```bash
+obsidian publish:status           # All changes
+obsidian publish:status total     # Count only
+obsidian publish:status new       # New files only
+obsidian publish:status changed   # Changed files only
+obsidian publish:status deleted   # Deleted files only
+```
+
+#### publish:add
+Publish a file or all changed files
+```bash
+obsidian publish:add              # Publish active file
+obsidian publish:add file="Note"  # Publish specific file
+obsidian publish:add path="Work/note.md"
+obsidian publish:add changed      # Publish all changed files
+```
+
+#### publish:remove
+Unpublish a file
+```bash
+obsidian publish:remove           # Unpublish active file
+obsidian publish:remove file="Note"
+obsidian publish:remove path="Work/note.md"
+```
+
+#### publish:open
+Open file on published site
+```bash
+obsidian publish:open             # Open active file
+obsidian publish:open file="Note"
+obsidian publish:open path="Work/note.md"
 ```
 
 ---

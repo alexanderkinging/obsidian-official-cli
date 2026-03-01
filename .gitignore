@@ -1,0 +1,19 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Secrets
+*.key
+*.pem
+.env
+.env.local
+secrets.json
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.swp
+*~

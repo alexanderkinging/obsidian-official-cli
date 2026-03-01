@@ -17,3 +17,17 @@ secrets.json
 *.tmp
 *.swp
 *~
+
+# Test and verification reports
+verification-report.md
+command-comparison-report.md
+adolago-comparison-report.md
+*-comparison-report.md
+*-verification-report.md
+test-results.md
+
+# Backup files
+backups/
+*.backup
+usability-test-report.md
+final-verification-report.md

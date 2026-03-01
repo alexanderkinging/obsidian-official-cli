@@ -1,1115 +1,328 @@
 ---
 name: obsidian-cli-official
 description: |
-  Complete official Obsidian CLI reference (v1.12+). All 115 commands documented.
-  Covers files, daily notes, search, tasks, tags, properties, links, bookmarks, 
-  bases, templates, history, sync, publish, themes, plugins, workspaces, and developer tools.
-  Cross-platform: macOS, Windows, Linux.
+  Official Obsidian CLI (v1.12+). Complete command-line interface for 
+  Obsidian notes, tasks, search, tags, properties, links, and more.
 homepage: https://help.obsidian.md/cli
 metadata:
   openclaw:
     emoji: "💎"
     requires:
-      apps: ["Obsidian"]
+      bins: ["obsidian"]
     platform: ["macos", "windows", "linux"]
+    install:
+      - id: "brew-macos"
+        kind: "brew"
+        formula: "alexanderkinging/tap/obsidian-cli-helper"
+        bins: ["obs-helper"]
+        label: "Install helper (macOS)"
+      - id: "manual"
+        kind: "manual"
+        label: "Manual setup (all platforms)"
+        url: "https://github.com/alexanderkinging/obsidian-official-cli#installation"
 ---
 
-# Obsidian Official CLI - Complete Reference
+# Obsidian Official CLI
 
-**Official Obsidian CLI (v1.12+)** - Complete documentation of all 115 commands.
-
-## About This Skill
-
-This OpenClaw skill provides complete access to Obsidian's official CLI, enabling AI agents to automate note-taking, task management, knowledge organization, and workspace customization.
-
-**Key capabilities:**
-- 📝 Automate daily journals and meeting notes
-- ✅ Manage tasks across your vault
-- 🔍 Search and organize knowledge
-- 🗄️ Work with Obsidian databases
-- 🎨 Customize themes, plugins, and workspaces
-
-**For complete use cases and OpenClaw integration tips, see [README.md](README.md).**
+Official command-line interface for Obsidian (v1.12+). 110 commands.
 
 ## Prerequisites
 
-- **Obsidian 1.12+** (Early Access)
-- **Catalyst license** (paid supporter - $25 one-time)
+- **Obsidian 1.12+** with Catalyst license ($25 one-time)
 - **Obsidian must be running** (CLI connects via IPC)
+- **Enable CLI**: Settings → General → Enable CLI
 
-## Quick Start
+## Setup
 
-### macOS
+Add Obsidian to PATH:
 
-#### 1. Enable CLI
-
-Settings → General → Enable CLI
-
-#### 2. Add to PATH
-
+**macOS:**
 ```bash
 export PATH="$PATH:/Applications/Obsidian.app/Contents/MacOS"
 ```
 
-#### 3. Test
-
-```bash
-obsidian version
-obsidian vault
-```
-
----
-
-### Windows
-
-#### 1. Enable CLI
-
-Settings → General → Enable CLI
-
-#### 2. Add to PATH
-
-**Option A: System Environment Variables**
-1. Open System Properties → Environment Variables
-2. Add to PATH: `C:\Users\<YourUsername>\AppData\Local\Obsidian`
-
-**Option B: PowerShell Profile**
+**Windows:**
 ```powershell
-# Add to $PROFILE
 $env:PATH += ";$env:LOCALAPPDATA\Obsidian"
 ```
 
-#### 3. Test
+**Linux:**
+- Snap: Already in PATH
+- Flatpak: `alias obsidian='flatpak run md.obsidian.Obsidian'`
+- AppImage: Move to `~/.local/bin` and `chmod +x`
 
-```powershell
-obsidian version
-obsidian vault
+**Test:** `obsidian version`
+
+## Syntax
+
+- **Parameters**: `name=value` or `name="value with spaces"`
+- **Flags**: just the name, e.g. `open`, `overwrite`
+- **Newlines**: use `\n` in content strings
+- **Target vault**: `obsidian vault="My Vault" <command>` (must be first)
+- **Target file**: `file=<name>` (wikilink-style) or `path=<folder/file.md>` (exact)
+- **Copy output**: append `--copy` to any command
+
+## Common Commands (with examples)
+
+### Daily Notes
+```bash
+obsidian daily                                    # Open today
+obsidian daily:append content="- [ ] Buy milk"    # Add to today
+obsidian daily:prepend content="# Important"      # Add to top
+obsidian daily:read                               # Read today's content
+obsidian daily:path                               # Get daily note path
 ```
 
----
-
-### Linux
-
-#### 1. Enable CLI
-
-Settings → General → Enable CLI
-
-#### 2. Add to PATH
-
-**Snap:**
+### Files
 ```bash
-export PATH="$PATH:/snap/bin"
+obsidian create name="Note" content="# Hello"     # Create note
+obsidian create name="Note" template=Meeting       # Create from template
+obsidian read file="Note"                          # Read note
+obsidian append file="Note" content="More text"    # Append to note
+obsidian prepend file="Note" content="Top text"    # Prepend to note
+obsidian move file="Note" to="Archive/Note.md"     # Move note
+obsidian rename file="Note" name="New Name"        # Rename note
+obsidian delete file="Note"                        # Delete note
+obsidian open file="Note"                          # Open note
 ```
 
-**Flatpak:**
+### Search
 ```bash
-alias obsidian='flatpak run md.obsidian.Obsidian'
+obsidian search query="meeting notes"              # Search vault
+obsidian search:context query="TODO"               # Search with context
+obsidian search:open query="project"               # Open search view
 ```
 
-**AppImage:**
+### Tasks
 ```bash
-# Move AppImage to ~/.local/bin
-mv Obsidian-*.AppImage ~/.local/bin/obsidian
-chmod +x ~/.local/bin/obsidian
-export PATH="$PATH:$HOME/.local/bin"
+obsidian tasks daily todo                          # Incomplete tasks in daily
+obsidian tasks todo                                # All incomplete tasks
+obsidian task daily line=3 toggle                  # Toggle task at line 3
 ```
 
-#### 3. Test
-
+### Tags & Properties
 ```bash
-obsidian version
-obsidian vault
-```
-
-## Command Syntax
-
-```bash
-obsidian <command> [options]
-
-# Options
-vault=<name>          # Target specific vault
-
-# Notes
-file=<name>           # Resolves by name (like wikilinks)
-path=<path>           # Exact path (folder/note.md)
-content="text"        # Quote values with spaces
-\n                    # Newline in content
-\t                    # Tab in content
-```
-
-## Complete Command Reference
-
-### Basics (5 commands)
-
-#### version
-Show Obsidian version
-```bash
-obsidian version
-```
-
-#### help
-Show all commands or help for specific command
-```bash
-obsidian help
-obsidian help search
-```
-
-#### vault
-Show vault info
-```bash
-obsidian vault                    # All info
-obsidian vault info=name          # Just name
-obsidian vault info=path          # Just path
-obsidian vault info=files         # File count
-obsidian vault info=folders       # Folder count
-obsidian vault info=size          # Size in bytes
-```
-
-#### vaults
-List known vaults
-```bash
-obsidian vaults                   # List all
-obsidian vaults verbose           # With paths
-obsidian vaults total             # Count only
-```
-
-#### reload
-Reload the vault
-```bash
-obsidian reload
-```
-
-#### restart
-Restart Obsidian app
-```bash
-obsidian restart
-```
-
----
-
-### Daily Notes (4 commands)
-
-#### daily
-Open daily note
-```bash
-obsidian daily
-obsidian daily paneType=tab       # Open in new tab
-obsidian daily paneType=split     # Open in split
-obsidian daily paneType=window    # Open in new window
-```
-
-#### daily:read
-Read daily note contents
-```bash
-obsidian daily:read
-```
-
-#### daily:append
-Append to daily note
-```bash
-obsidian daily:append content="- [ ] Task"
-obsidian daily:append content="text" inline    # No newline
-obsidian daily:append content="text" open      # Open after
-```
-
-#### daily:prepend
-Prepend to daily note
-```bash
-obsidian daily:prepend content="# Header"
-obsidian daily:prepend content="text" inline
-```
-
-#### daily:path
-Get daily note path
-```bash
-obsidian daily:path
-```
-
----
-
-### Files (18 commands)
-
-#### create
-Create a new file
-```bash
-obsidian create name="Note" content="Hello"
-obsidian create name="Note" template="Travel"
-obsidian create path="Work/note.md" content="text"
-obsidian create name="Note" overwrite
-obsidian create name="Note" open newtab
-```
-
-#### read
-Read file contents
-```bash
-obsidian read file="Recipe"
-obsidian read path="Work/notes.md"
-```
-
-#### file
-Show file info
-```bash
-obsidian file file="Recipe"
-obsidian file path="Work/notes.md"
-```
-
-#### open
-Open file in Obsidian
-```bash
-obsidian open file="Recipe"
-obsidian open file="Recipe" newtab
-```
-
-#### delete
-Delete file
-```bash
-obsidian delete file="Old"
-obsidian delete file="Old" permanent    # Skip trash
-```
-
-#### move
-Move or rename file
-```bash
-obsidian move file="Old" to="Archive/Old.md"
-```
-
-#### rename
-Rename file
-```bash
-obsidian rename file="Old" name="New"
-```
-
-#### append
-Append to file
-```bash
-obsidian append file="Log" content="Entry"
-obsidian append file="Log" content="text" inline
-```
-
-#### prepend
-Prepend to file
-```bash
-obsidian prepend file="Log" content="Header"
-obsidian prepend file="Log" content="text" inline
-```
-
-#### unique
-Create unique note with timestamp
-```bash
-obsidian unique name="Meeting" content="notes"
-obsidian unique name="Meeting" open paneType=tab
-```
-
-#### wordcount
-Count words and characters
-```bash
-obsidian wordcount file="Note"
-obsidian wordcount file="Note" words
-obsidian wordcount file="Note" characters
-```
-
-#### random
-Open random note
-```bash
-obsidian random
-obsidian random folder="Work"
-obsidian random newtab
-```
-
-#### random:read
-Read random note
-```bash
-obsidian random:read
-obsidian random:read folder="Work"
-```
-
-#### recents
-List recently opened files
-```bash
-obsidian recents
-obsidian recents total
-```
-
-#### files
-List files in vault
-```bash
-obsidian files
-obsidian files folder="Work"
-obsidian files ext=md
-obsidian files total
-```
-
-#### folders
-List folders
-```bash
-obsidian folders
-obsidian folders folder="Work"
-obsidian folders total
-```
-
-#### folder
-Show folder info
-```bash
-obsidian folder path="Work"
-obsidian folder path="Work" info=files
-obsidian folder path="Work" info=folders
-obsidian folder path="Work" info=size
-```
-
-#### outline
-Show headings
-```bash
-obsidian outline file="Note"
-obsidian outline file="Note" format=md
-obsidian outline file="Note" format=json
-obsidian outline file="Note" total
-```
-
----
-
-### Search (3 commands)
-
-#### search
-Search vault
-```bash
-obsidian search query="meeting notes"
-obsidian search query="TODO" path="Work" limit=10
-obsidian search query="test" format=json
-obsidian search query="Bug" case
-obsidian search query="error" total
-```
-
-#### search:context
-Search with matching line context
-```bash
-obsidian search:context query="TODO"
-obsidian search:context query="error" path="Work"
-obsidian search:context query="bug" case
-```
-
-#### search:open
-Open search view
-```bash
-obsidian search:open query="TODO"
-```
-
----
-
-### Tasks (2 commands)
-
-#### tasks
-List tasks
-```bash
-obsidian tasks                    # All tasks
-obsidian tasks daily              # Daily note tasks
-obsidian tasks daily todo         # Incomplete
-obsidian tasks daily done         # Completed
-obsidian tasks file="Recipe"
-obsidian tasks verbose            # With file paths
-obsidian tasks total
-obsidian tasks status="/"         # Custom status
-```
-
-#### task
-Update task
-```bash
-obsidian task daily line=3 toggle
-obsidian task daily line=3 done
-obsidian task daily line=3 todo
-obsidian task ref="Work/todo.md:5" toggle
-obsidian task daily line=3 status="/"
-```
-
----
-
-### Tags (2 commands)
-
-#### tags
-List tags
-```bash
-obsidian tags file="Note"
-obsidian tags total
-obsidian tags counts
-obsidian tags counts sort=count
-obsidian tags format=json
-obsidian tags active              # Active file
-```
-
-#### tag
-Get tag info
-```bash
-obsidian tag name="project"
-obsidian tag name="project" verbose
-obsidian tag name="project" total
-```
-
----
-
-### Properties (4 commands)
-
-#### properties
-List properties
-```bash
-obsidian properties file="Note"
-obsidian properties name="status"
-obsidian properties total
-obsidian properties counts
-obsidian properties counts sort=count
-obsidian properties format=yaml
-obsidian properties format=json
-obsidian properties active
-```
-
-#### property:read
-Read property value
-```bash
-obsidian property:read name="status" file="Note"
-```
-
-#### property:set
-Set property
-```bash
+obsidian tags counts                               # List all tags
+obsidian tags counts sort=count                    # Sort by frequency
 obsidian property:set name="status" value="done" file="Note"
-obsidian property:set name="due" value="2026-03-01" type=date file="Note"
-```
-
-#### property:remove
-Remove property
-```bash
+obsidian property:read name="status" file="Note"
 obsidian property:remove name="status" file="Note"
-```
-
----
-
-### Aliases (1 command)
-
-#### aliases
-List aliases
-```bash
-obsidian aliases
-obsidian aliases file="Note"
-obsidian aliases total
-obsidian aliases verbose
-obsidian aliases active
-```
-
----
-
-### Links (5 commands)
-
-#### links
-List outgoing links
-```bash
-obsidian links file="Note"
-obsidian links file="Note" total
-```
-
-#### backlinks
-List incoming links
-```bash
-obsidian backlinks file="Note"
-obsidian backlinks file="Note" counts
-obsidian backlinks file="Note" total
-obsidian backlinks file="Note" format=json
-```
-
-#### orphans
-Files with no incoming links
-```bash
-obsidian orphans
-obsidian orphans total
-obsidian orphans all              # Include non-markdown
-```
-
-#### deadends
-Files with no outgoing links
-```bash
-obsidian deadends
-obsidian deadends total
-obsidian deadends all
-```
-
-#### unresolved
-Broken/unresolved links
-```bash
-obsidian unresolved
-obsidian unresolved total
-obsidian unresolved counts
-obsidian unresolved verbose
-obsidian unresolved format=json
-```
-
----
-
-### Bookmarks (2 commands)
-
-#### bookmarks
-List bookmarks
-```bash
-obsidian bookmarks
-obsidian bookmarks total
-obsidian bookmarks verbose
-obsidian bookmarks format=json
-```
-
-#### bookmark
-Add bookmark
-```bash
-obsidian bookmark file="note.md"
-obsidian bookmark file="note.md" subpath="#heading"
-obsidian bookmark folder="Work"
-obsidian bookmark search="TODO"
-obsidian bookmark url="https://example.com" title="Example"
-```
-
----
-
-### Bases (Database) (3 commands)
-
-#### bases
-List all base files
-```bash
-obsidian bases
-```
-
-#### base:views
-List views in current base
-```bash
-obsidian base:views
-```
-
-#### base:query
-Query base
-```bash
-obsidian base:query file="MyBase"
-obsidian base:query file="MyBase" format=json
-obsidian base:query file="MyBase" format=csv
-obsidian base:query file="MyBase" view="View Name"
-```
-
-#### base:create
-Create item in base
-```bash
-obsidian base:create name="New Item"
-obsidian base:create name="Item" content="text" open
-```
-
----
-
-### Templates (3 commands)
-
-#### templates
-List templates
-```bash
-obsidian templates
-obsidian templates total
-```
-
-#### template:read
-Read template
-```bash
-obsidian template:read name="Daily"
-obsidian template:read name="Daily" resolve
-obsidian template:read name="Daily" resolve title="My Note"
-```
-
-#### template:insert
-Insert template
-```bash
-obsidian template:insert name="Daily"
-```
-
----
-
-### Commands & Hotkeys (4 commands)
-
-#### commands
-List command IDs
-```bash
-obsidian commands
-obsidian commands filter="editor"
-```
-
-#### command
-Execute command
-```bash
-obsidian command id="app:open-settings"
-```
-
-#### hotkeys
-List hotkeys
-```bash
-obsidian hotkeys
-obsidian hotkeys all
-obsidian hotkeys total
-obsidian hotkeys verbose
-```
-
-#### hotkey
-Get hotkey for command
-```bash
-obsidian hotkey id="app:open-settings"
-obsidian hotkey id="app:open-settings" verbose
-```
-
----
-
-### Tabs & Workspaces (7 commands)
-
-#### tabs
-List open tabs
-```bash
-obsidian tabs
-obsidian tabs ids
-```
-
-#### tab:open
-Open new tab
-```bash
-obsidian tab:open
-obsidian tab:open file="Work/note.md"
-obsidian tab:open group=2
-```
-
-#### workspace
-Show workspace tree
-```bash
-obsidian workspace
-obsidian workspace ids
-```
-
-#### workspaces
-List saved workspaces
-```bash
-obsidian workspaces
-obsidian workspaces total
-```
-
-#### workspace:save
-Save current layout
-```bash
-obsidian workspace:save name="coding"
-```
-
-#### workspace:load
-Load workspace
-```bash
-obsidian workspace:load name="coding"
-```
-
-#### workspace:delete
-Delete workspace
-```bash
-obsidian workspace:delete name="old"
-```
-
----
-
-### History & Diff (6 commands)
-
-#### history
-List file history
-```bash
-obsidian history file="Note"
-```
-
-#### history:list
-List files with history
-```bash
-obsidian history:list
-```
-
-#### history:read
-Read history version
-```bash
-obsidian history:read file="Note"
-obsidian history:read file="Note" version=3
-```
-
-#### history:restore
-Restore version
-```bash
-obsidian history:restore file="Note" version=3
-```
-
-#### history:open
-Open file recovery UI
-```bash
-obsidian history:open file="Note"
-```
-
-#### diff
-Diff versions
-```bash
-obsidian diff file="Note"
-obsidian diff file="Note" from=1 to=3
-obsidian diff file="Note" filter=local
-obsidian diff file="Note" filter=sync
-```
-
----
-
-### Sync (7 commands)
-
-#### sync:status
-Show sync status
-```bash
-obsidian sync:status
-```
-
-#### sync
-Pause/resume sync
-```bash
-obsidian sync on
-obsidian sync off
-```
-
-#### sync:history
-Sync version history
-```bash
-obsidian sync:history file="Note"
-obsidian sync:history file="Note" total
-```
-
-#### sync:read
-Read sync version
-```bash
-obsidian sync:read file="Note" version=2
-```
-
-#### sync:restore
-Restore sync version
-```bash
-obsidian sync:restore file="Note" version=2
-```
-
-#### sync:deleted
-List deleted files
-```bash
-obsidian sync:deleted
-obsidian sync:deleted total
-```
-
-#### sync:open
-Open sync history UI
-```bash
-obsidian sync:open file="Note"
-```
-
----
-
-### Publish (6 commands)
-
-⚠️ **Requires Obsidian Publish subscription** ($8/month or $96/year)
-
-These commands only work if you have an active Obsidian Publish subscription.
-
-#### publish:site
-Show publish site info
-```bash
-obsidian publish:site             # Show slug and URL
-```
-
-#### publish:list
-List published files
-```bash
-obsidian publish:list
-obsidian publish:list total       # Count only
-```
-
-#### publish:status
-List publish changes
-```bash
-obsidian publish:status           # All changes
-obsidian publish:status total     # Count only
-obsidian publish:status new       # New files only
-obsidian publish:status changed   # Changed files only
-obsidian publish:status deleted   # Deleted files only
-```
-
-#### publish:add
-Publish a file or all changed files
-```bash
-obsidian publish:add              # Publish active file
-obsidian publish:add file="Note"  # Publish specific file
-obsidian publish:add path="Work/note.md"
-obsidian publish:add changed      # Publish all changed files
-```
-
-#### publish:remove
-Unpublish a file
-```bash
-obsidian publish:remove           # Unpublish active file
-obsidian publish:remove file="Note"
-obsidian publish:remove path="Work/note.md"
-```
-
-#### publish:open
-Open file on published site
-```bash
-obsidian publish:open             # Open active file
-obsidian publish:open file="Note"
-obsidian publish:open path="Work/note.md"
-```
-
----
-
-### Themes & CSS (7 commands)
-
-#### theme
-Show active theme
-```bash
-obsidian theme
-obsidian theme name="Minimal"
-```
-
-#### themes
-List themes
-```bash
-obsidian themes
-obsidian themes versions
-```
-
-#### theme:set
-Set active theme
-```bash
-obsidian theme:set name="Minimal"
-obsidian theme:set name=""        # Default theme
-```
-
-#### theme:install
-Install theme
-```bash
-obsidian theme:install name="Minimal"
-obsidian theme:install name="Minimal" enable
-```
-
-#### theme:uninstall
-Uninstall theme
-```bash
-obsidian theme:uninstall name="Minimal"
-```
-
-#### snippets
-List CSS snippets
-```bash
-obsidian snippets
-```
-
-#### snippets:enabled
-List enabled snippets
-```bash
-obsidian snippets:enabled
-```
-
-#### snippet:enable
-Enable snippet
-```bash
-obsidian snippet:enable name="custom"
-```
-
-#### snippet:disable
-Disable snippet
-```bash
-obsidian snippet:disable name="custom"
-```
-
----
-
-### Plugins (9 commands)
-
-#### plugins
-List plugins
-```bash
-obsidian plugins
-obsidian plugins filter=core
-obsidian plugins filter=community
-obsidian plugins versions
-```
-
-#### plugins:enabled
-List enabled plugins
-```bash
-obsidian plugins:enabled
-obsidian plugins:enabled filter=community versions
-```
-
-#### plugins:restrict
-Restricted mode
-```bash
-obsidian plugins:restrict
-obsidian plugins:restrict on
-obsidian plugins:restrict off
-```
-
-#### plugin
-Get plugin info
-```bash
-obsidian plugin id="dataview"
-```
-
-#### plugin:enable
-Enable plugin
-```bash
-obsidian plugin:enable id="dataview"
-obsidian plugin:enable id="dataview" filter=community
-```
-
-#### plugin:disable
-Disable plugin
-```bash
-obsidian plugin:disable id="dataview"
-```
-
-#### plugin:install
-Install plugin
-```bash
-obsidian plugin:install id="dataview"
-obsidian plugin:install id="dataview" enable
-```
-
-#### plugin:uninstall
-Uninstall plugin
-```bash
-obsidian plugin:uninstall id="dataview"
-```
-
-#### plugin:reload
-Reload plugin (dev)
-```bash
-obsidian plugin:reload id="my-plugin"
-```
-
----
-
-### Developer Tools (10 commands)
-
-#### devtools
-Toggle Electron DevTools
-```bash
-obsidian devtools
-```
-
-#### eval
-Execute JavaScript
-```bash
-obsidian eval code="app.vault.getFiles().length"
-obsidian eval code="console.log('hello')"
-```
-
-#### dev:screenshot
-Take screenshot
-```bash
-obsidian dev:screenshot path="screenshot.png"
-```
-
-#### dev:console
-Show console messages
-```bash
-obsidian dev:console
-obsidian dev:console clear
-obsidian dev:console limit=100
-obsidian dev:console level=error
-```
-
-#### dev:errors
-Show errors
-```bash
-obsidian dev:errors
-obsidian dev:errors clear
-```
-
-#### dev:css
-Inspect CSS
-```bash
-obsidian dev:css selector=".workspace"
-obsidian dev:css selector=".workspace" prop="background"
-```
-
-#### dev:dom
-Query DOM
-```bash
-obsidian dev:dom selector=".workspace"
-obsidian dev:dom selector=".workspace" total
-obsidian dev:dom selector=".workspace" text
-obsidian dev:dom selector=".workspace" attr="class"
-```
-
-#### dev:cdp
-Chrome DevTools Protocol
-```bash
-obsidian dev:cdp method="Page.getLayoutMetrics"
-obsidian dev:cdp method="Runtime.evaluate" params='{"expression":"1+1"}'
-```
-
-#### dev:debug
-Attach/detach debugger
-```bash
-obsidian dev:debug on
-obsidian dev:debug off
-```
-
-#### dev:mobile
-Mobile emulation
-```bash
-obsidian dev:mobile on
-obsidian dev:mobile off
-```
-
-#### web
-Open URL in web viewer
-```bash
-obsidian web url="https://example.com"
-obsidian web url="https://example.com" newtab
-```
-
----
-
-## Multi-Vault Usage
-
-Target specific vault:
-```bash
-obsidian vault="Notes" daily
-obsidian vault="Work" search query="test"
-```
-
-**Note**: `vault=<name>` must be the FIRST parameter.
-
----
+obsidian properties file="Note"                    # List all properties
+```
+
+### Links
+```bash
+obsidian backlinks file="Note"                     # Incoming links
+obsidian links file="Note"                         # Outgoing links
+obsidian orphans                                   # No incoming links
+obsidian deadends                                  # No outgoing links
+obsidian unresolved                                # Broken links
+```
+
+### Developer
+```bash
+obsidian devtools                                  # Open dev tools
+obsidian eval code="app.vault.getFiles().length"   # Run JavaScript
+obsidian dev:screenshot path=screenshot.png         # Screenshot
+obsidian plugin:reload id=my-plugin                # Reload plugin
+```
+
+## All Commands (110 total)
+
+### General (4)
+- `help` - Show help / help for specific command
+- `version` - Show Obsidian version
+- `reload` - Reload the app window
+- `restart` - Restart the app
+
+### Daily Notes (5)
+- `daily` - Open daily note
+- `daily:path` - Get daily note path
+- `daily:read` - Read daily note contents
+- `daily:append` - Append content to daily note
+- `daily:prepend` - Prepend content to daily note
+
+### Files & Folders (12)
+- `file` - Show file info
+- `files` - List files in vault
+- `folder` - Show folder info
+- `folders` - List folders in vault
+- `open` - Open a file
+- `create` - Create a new file
+- `read` - Read file contents
+- `append` - Append content to a file
+- `prepend` - Prepend content to a file
+- `move` - Move or rename a file
+- `rename` - Rename a file
+- `delete` - Delete a file
+
+### Search (3)
+- `search` - Search vault for text
+- `search:context` - Search with matching line context
+- `search:open` - Open search view
+
+### Tasks (2)
+- `tasks` - List tasks in the vault
+- `task` - Show or update a task
+
+### Tags (2)
+- `tags` - List tags in the vault
+- `tag` - Get tag info
+
+### Properties (4)
+- `properties` - List properties in the vault
+- `property:set` - Set a property on a file
+- `property:remove` - Remove a property from a file
+- `property:read` - Read a property value
+
+### Aliases (1)
+- `aliases` - List aliases in the vault
+
+### Links (5)
+- `backlinks` - List backlinks to a file
+- `links` - List outgoing links from a file
+- `unresolved` - List unresolved links
+- `orphans` - Files with no incoming links
+- `deadends` - Files with no outgoing links
+
+### Outline (1)
+- `outline` - Show headings for a file
+
+### Bookmarks (2)
+- `bookmarks` - List bookmarks
+- `bookmark` - Add a bookmark
+
+### Bases / Database (3)
+- `bases` - List all base files
+- `base:views` - List views in a base
+- `base:create` - Create a new item in a base
+- `base:query` - Query a base and return results
+
+### Templates (3)
+- `templates` - List templates
+- `template:read` - Read template content
+- `template:insert` - Insert template into active file
+
+### Commands & Hotkeys (4)
+- `commands` - List available command IDs
+- `command` - Execute an Obsidian command
+- `hotkeys` - List hotkeys
+- `hotkey` - Get hotkey for a command
+
+### Tabs & Workspaces (5)
+- `tabs` - List open tabs
+- `tab:open` - Open a new tab
+- `workspace` - Show workspace tree
+- `workspaces` - List saved workspaces
+- `workspace:load` - Load a saved workspace
+- `workspace:save` - Save current layout
+- `workspace:delete` - Delete a saved workspace
+
+### File History & Diff (6)
+- `diff` - List or diff local/sync versions
+- `history` - List file history versions
+- `history:list` - List files with history
+- `history:read` - Read a file history version
+- `history:restore` - Restore a file history version
+- `history:open` - Open file recovery
+
+### Sync (8)
+- `sync` - Pause or resume sync (on/off)
+- `sync:status` - Show sync status
+- `sync:history` - List sync version history
+- `sync:read` - Read a sync version
+- `sync:restore` - Restore a sync version
+- `sync:open` - Open sync history
+- `sync:deleted` - List deleted files in sync
+
+### Publish (6)
+- `publish:site` - Show publish site info
+- `publish:list` - List published files
+- `publish:status` - Show publish status
+- `publish:add` - Publish files
+- `publish:remove` - Unpublish files
+- `publish:open` - Open published site
+
+### Themes & Snippets (9)
+- `themes` - List installed themes
+- `theme` - Show active theme or get info
+- `theme:set` - Set active theme
+- `theme:install` - Install a community theme
+- `theme:uninstall` - Uninstall a theme
+- `snippets` - List installed CSS snippets
+- `snippets:enabled` - List enabled CSS snippets
+- `snippet:enable` - Enable a CSS snippet
+- `snippet:disable` - Disable a CSS snippet
+
+### Plugins (9)
+- `plugins` - List installed plugins
+- `plugins:enabled` - List enabled plugins
+- `plugins:restrict` - Toggle restricted mode
+- `plugin` - Get plugin info
+- `plugin:enable` - Enable a plugin
+- `plugin:disable` - Disable a plugin
+- `plugin:install` - Install a community plugin
+- `plugin:uninstall` - Uninstall a community plugin
+- `plugin:reload` - Reload a plugin
+
+### Vault (3)
+- `vault` - Show vault info
+- `vaults` - List known vaults
+- `vault:open` - Open a vault (TUI only)
+
+### Random Notes (2)
+- `random` - Open a random note
+- `random:read` - Read a random note
+
+### Unique Notes (1)
+- `unique` - Create unique note
+
+### Web Viewer (1)
+- `web` - Open URL in web viewer
+
+### Word Count (1)
+- `wordcount` - Count words and characters
+
+### Recently Opened (1)
+- `recents` - List recently opened files
+
+### Developer (10)
+- `devtools` - Toggle Electron dev tools
+- `eval` - Execute JavaScript
+- `dev:screenshot` - Take a screenshot
+- `dev:console` - Show captured console messages
+- `dev:errors` - Show captured errors
+- `dev:css` - Inspect CSS with source locations
+- `dev:dom` - Query DOM elements
+- `dev:cdp` - Run Chrome DevTools Protocol command
+- `dev:debug` - Attach/detach CDP debugger
+- `dev:mobile` - Toggle mobile emulation
 
 ## Troubleshooting
 
-### "Cannot connect"
+**"Cannot connect to Obsidian"**
 - Ensure Obsidian is running
-- Enable CLI in Settings → General
+- Enable CLI in Settings → General → Enable CLI
 
-### "Command not found"
-- Add to PATH: `export PATH="$PATH:/Applications/Obsidian.app/Contents/MacOS"`
-- Or use full path: `/Applications/Obsidian.app/Contents/MacOS/obsidian`
+**"Command not found: obsidian"**
+- Add Obsidian to PATH (see Setup above)
 
-### File not found
-- Use `file=<name>` for wikilink-style resolution
-- Use `path=<path>` for exact paths
-
----
+**"File not found"**
+- `file=Name` resolves like wikilinks (no path, no .md)
+- `path=folder/file.md` for exact paths
 
 ## 中文说明
 
 ### 前置条件
-- Obsidian 1.12+ (Early Access)
-- Catalyst 许可证（付费支持者）
-- macOS 系统
+- Obsidian 1.12+ 需要 Catalyst 许可证（$25）
 - Obsidian 必须运行中
+- 启用 CLI：设置 → 通用 → 启用 CLI
 
-### 快速开始
-1. 设置 → 通用 → 启用 CLI
-2. 添加到 PATH：`export PATH="$PATH:/Applications/Obsidian.app/Contents/MacOS"`
-3. 测试：`obsidian version`
-
-### 完整功能
-- 110 个官方命令
-- 文件操作、日记、搜索、任务、标签
-- 书签、数据库、模板、历史记录
-- 同步、发布、主题、插件
-- 工作区、开发者工具
-
-详细用法见上方英文文档。
+### 常用命令
+```bash
+obsidian daily                    # 打开今日日记
+obsidian create name="笔记"       # 创建笔记
+obsidian search query="关键词"    # 搜索
+obsidian tasks daily todo         # 列出未完成任务
+obsidian tags counts              # 列出标签
+```

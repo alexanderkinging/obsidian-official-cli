@@ -31,7 +31,7 @@ This skill enables OpenClaw to:
 ### 2. Install Skill
 
 ```bash
-clawhub install obsidian-official-cli
+clawhub install obsidian-catalyst-cli
 ```
 
 ### 3. Verify
@@ -97,7 +97,7 @@ MIT
 
 **安装**：
 ```bash
-clawhub install obsidian-official-cli
+clawhub install obsidian-catalyst-cli
 ```
 
 **文档**：https://help.obsidian.md/cli

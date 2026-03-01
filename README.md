@@ -20,13 +20,19 @@ This OpenClaw skill provides **complete access to Obsidian's official CLI** (v1.
 
 - **Obsidian 1.12+** (Early Access)
 - **Catalyst license** (paid supporter - $25 one-time)
-- **macOS** system
+- **Platform**: macOS, Windows, or Linux
 - **Obsidian must be running** (CLI connects via IPC)
 - **Obsidian Publish subscription** (optional, $8/month for publish commands)
 
 ## Installation
 
-### Via Homebrew (Recommended) 🍺
+### Via ClawHub (OpenClaw) - All Platforms
+
+```bash
+clawhub install obsidian-cli-official
+```
+
+### Via Homebrew (macOS/Linux) 🍺
 
 ```bash
 # Add tap
@@ -39,35 +45,109 @@ brew install obsidian-cli-helper
 obs-helper help
 ```
 
-### Via ClawHub (OpenClaw)
-
-```bash
-clawhub install obsidian-cli-official
-```
-
 ### Manual Setup
 
-### 1. Get Catalyst License
+#### macOS
+
+**1. Get Catalyst License**
 
 Visit https://obsidian.md/pricing and purchase Catalyst ($25 one-time).
 
-### 2. Enable CLI in Obsidian
+**2. Enable CLI in Obsidian**
 
 Settings → General → Enable CLI
 
-### 3. Add to PATH
+**3. Add to PATH**
 
 ```bash
 echo 'export PATH="$PATH:/Applications/Obsidian.app/Contents/MacOS"' >> ~/.zprofile
 source ~/.zprofile
 ```
 
-### 4. Test
+**4. Test**
 
 ```bash
 obsidian version
 obsidian vault
 ```
+
+---
+
+#### Windows
+
+**1. Get Catalyst License**
+
+Visit https://obsidian.md/pricing and purchase Catalyst ($25 one-time).
+
+**2. Enable CLI in Obsidian**
+
+Settings → General → Enable CLI
+
+**3. Add to PATH**
+
+**Option A: System Environment Variables**
+1. Press `Win + X` → System → Advanced system settings
+2. Environment Variables → PATH → Edit
+3. Add: `C:\Users\<YourUsername>\AppData\Local\Obsidian`
+
+**Option B: PowerShell Profile**
+```powershell
+# Edit profile
+notepad $PROFILE
+
+# Add this line
+$env:PATH += ";$env:LOCALAPPDATA\Obsidian"
+
+# Reload
+. $PROFILE
+```
+
+**4. Test**
+
+```powershell
+obsidian version
+obsidian vault
+```
+
+---
+
+#### Linux
+
+**1. Get Catalyst License**
+
+Visit https://obsidian.md/pricing and purchase Catalyst ($25 one-time).
+
+**2. Enable CLI in Obsidian**
+
+Settings → General → Enable CLI
+
+**3. Add to PATH**
+
+**Snap:**
+```bash
+# Already in PATH
+obsidian version
+```
+
+**Flatpak:**
+```bash
+# Add alias to ~/.bashrc
+echo 'alias obsidian="flatpak run md.obsidian.Obsidian"' >> ~/.bashrc
+source ~/.bashrc
+```
+
+**AppImage:**
+```bash
+# Move to ~/.local/bin
+mv Obsidian-*.AppImage ~/.local/bin/obsidian
+chmod +x ~/.local/bin/obsidian
+
+# Add to PATH
+echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
+source ~/.bashrc
+```
+
+**4. Test**
 
 ```bash
 obsidian version
@@ -331,20 +411,37 @@ obsidian vault="Notes" search query="test"
 
 - Obsidian 1.12+ (Early Access)
 - Catalyst 许可证（$25 一次性付费）
-- macOS 系统
+- 平台：macOS、Windows 或 Linux
 - Obsidian 必须运行中
 - Obsidian Publish 订阅（可选，$8/月，用于 publish 命令）
 
 ### 安装
 
+**通过 ClawHub（所有平台）：**
 ```bash
 clawhub install obsidian-cli-official
 ```
 
+**通过 Homebrew（macOS/Linux）：**
+```bash
+brew install alexanderkinging/tap/obsidian-cli-helper
+```
+
 ### 配置
 
+**macOS:**
 1. 设置 → 通用 → 启用 CLI
 2. 添加到 PATH：`export PATH="$PATH:/Applications/Obsidian.app/Contents/MacOS"`
+3. 测试：`obsidian version`
+
+**Windows:**
+1. 设置 → 通用 → 启用 CLI
+2. 添加到 PATH：系统属性 → 环境变量 → PATH → 添加 `C:\Users\<用户名>\AppData\Local\Obsidian`
+3. 测试：`obsidian version`
+
+**Linux:**
+1. 设置 → 通用 → 启用 CLI
+2. 根据安装方式配置（Snap/Flatpak/AppImage）
 3. 测试：`obsidian version`
 
 ### OpenClaw 使用场景

@@ -4,13 +4,14 @@ description: |
   Complete official Obsidian CLI reference (v1.12+). All 115 commands documented.
   Covers files, daily notes, search, tasks, tags, properties, links, bookmarks, 
   bases, templates, history, sync, publish, themes, plugins, workspaces, and developer tools.
+  Cross-platform: macOS, Windows, Linux.
 homepage: https://help.obsidian.md/cli
 metadata:
   openclaw:
     emoji: "💎"
     requires:
-      apps: ["Obsidian.app"]
-    platform: macos
+      apps: ["Obsidian"]
+    platform: ["macos", "windows", "linux"]
 ---
 
 # Obsidian Official CLI - Complete Reference
@@ -33,23 +34,86 @@ This OpenClaw skill provides complete access to Obsidian's official CLI, enablin
 ## Prerequisites
 
 - **Obsidian 1.12+** (Early Access)
-- **Catalyst license** (paid supporter)
-- **macOS** system
+- **Catalyst license** (paid supporter - $25 one-time)
 - **Obsidian must be running** (CLI connects via IPC)
 
 ## Quick Start
 
-### 1. Enable CLI
+### macOS
+
+#### 1. Enable CLI
 
 Settings → General → Enable CLI
 
-### 2. Add to PATH
+#### 2. Add to PATH
 
 ```bash
 export PATH="$PATH:/Applications/Obsidian.app/Contents/MacOS"
 ```
 
-### 3. Test
+#### 3. Test
+
+```bash
+obsidian version
+obsidian vault
+```
+
+---
+
+### Windows
+
+#### 1. Enable CLI
+
+Settings → General → Enable CLI
+
+#### 2. Add to PATH
+
+**Option A: System Environment Variables**
+1. Open System Properties → Environment Variables
+2. Add to PATH: `C:\Users\<YourUsername>\AppData\Local\Obsidian`
+
+**Option B: PowerShell Profile**
+```powershell
+# Add to $PROFILE
+$env:PATH += ";$env:LOCALAPPDATA\Obsidian"
+```
+
+#### 3. Test
+
+```powershell
+obsidian version
+obsidian vault
+```
+
+---
+
+### Linux
+
+#### 1. Enable CLI
+
+Settings → General → Enable CLI
+
+#### 2. Add to PATH
+
+**Snap:**
+```bash
+export PATH="$PATH:/snap/bin"
+```
+
+**Flatpak:**
+```bash
+alias obsidian='flatpak run md.obsidian.Obsidian'
+```
+
+**AppImage:**
+```bash
+# Move AppImage to ~/.local/bin
+mv Obsidian-*.AppImage ~/.local/bin/obsidian
+chmod +x ~/.local/bin/obsidian
+export PATH="$PATH:$HOME/.local/bin"
+```
+
+#### 3. Test
 
 ```bash
 obsidian version

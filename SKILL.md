@@ -1,9 +1,8 @@
 ---
 name: obsidian-official-cli
 description: |
-  Obsidian 官方 CLI 集成（需要 Obsidian 1.12+ 和 Catalyst license）。
-  支持日记、任务、标签、模板、搜索等完整功能。
-  触发词：Obsidian、笔记、vault、日记、daily note
+  Official Obsidian CLI integration (requires Obsidian 1.12+ and Catalyst license).
+  Full support for Daily Notes, Tasks, Tags, Templates, and more.
 homepage: https://help.obsidian.md/cli
 metadata:
   openclaw:
@@ -15,152 +14,166 @@ metadata:
 
 # Obsidian Official CLI
 
-Obsidian 官方命令行界面集成，功能比社区版更完整。
+Official Obsidian command-line interface integration with full feature support.
 
-**官方文档**: https://help.obsidian.md/cli
+**Official Docs**: https://help.obsidian.md/cli
 
-## 前置条件
+## Prerequisites
 
-1. **Obsidian 1.12+** (Early Access 版本)
-2. **Catalyst license** (付费支持者)
-3. 设置 → 通用 → 启用"命令行界面" → 注册到 PATH
-4. **Obsidian 应用必须运行中**
+1. **Obsidian 1.12+** (Early Access version)
+2. **Catalyst license** (paid supporter)
+3. Settings → General → Enable "Command line interface" → Register to PATH
+4. **Obsidian app must be running**
 
-## 安装 CLI
+## Install CLI
 
-1. 打开 Obsidian → 设置 → 通用
-2. 启用「命令行界面」
-3. 点击「注册到 PATH」
-4. 重启终端
+1. Open Obsidian → Settings → General
+2. Enable "Command line interface"
+3. Click "Register to PATH"
+4. Restart terminal
 
-验证安装：
+Verify installation:
 ```bash
 obsidian help
 ```
 
-## 快速开始
+## Quick Start
 
 ```bash
-# 打开今日日记
+# Open today's daily note
 obsidian daily
 
-# 追加内容到日记
-obsidian daily:append content="- [ ] 待办事项"
+# Append to daily note
+obsidian daily:append content="- [ ] Task"
 
-# 搜索笔记
-obsidian search query="关键词"
+# Search notes
+obsidian search query="keyword"
 
-# 创建笔记
-obsidian create name="新笔记" content="# 标题\n\n内容"
+# Create note
+obsidian create name="New Note" content="# Title\n\nContent"
 
-# 读取文件
-obsidian read file=笔记名
+# Read file
+obsidian read file=NoteName
 ```
 
-## 常用命令
+## Common Commands
 
-### 日记 (Daily Notes)
+### Daily Notes
 
 ```bash
-obsidian daily                    # 打开今日日记
-obsidian daily:read               # 读取日记内容
-obsidian daily:append content="..." # 追加到末尾
-obsidian daily:prepend content="..." # 插入到开头
+obsidian daily                    # Open today's daily note
+obsidian daily:read               # Read daily note content
+obsidian daily:append content="..." # Append to end
+obsidian daily:prepend content="..." # Insert at beginning
 ```
 
-### 文件操作
+### File Operations
 
 ```bash
-obsidian files                    # 列出所有文件
-obsidian read file=笔记名          # 读取文件
-obsidian create name="标题" content="内容"
-obsidian create name="标题" template=模板名
-obsidian append file=笔记 content="追加内容"
-obsidian open file=笔记           # 在 Obsidian 中打开
-obsidian move from="旧路径" to="新路径"
-obsidian delete file=笔记
+obsidian files                    # List all files
+obsidian read file=NoteName       # Read file
+obsidian create name="Title" content="Content"
+obsidian create name="Title" template=TemplateName
+obsidian append file=Note content="Append content"
+obsidian open file=Note           # Open in Obsidian
+obsidian move from="old/path" to="new/path"
+obsidian delete file=Note
 ```
 
-### 搜索和标签
+### Search and Tags
 
 ```bash
-obsidian search query="关键词"
-obsidian tags counts              # 列出所有标签
-obsidian tasks                    # 列出所有任务
-obsidian tasks daily              # 日记中的任务
+obsidian search query="keyword"
+obsidian tags counts              # List all tags
+obsidian tasks                    # List all tasks
+obsidian tasks daily              # Tasks in daily note
 ```
 
-### 属性 (Frontmatter)
+### Properties (Frontmatter)
 
 ```bash
-obsidian properties file=笔记
-obsidian property:set file=笔记 key=status value=done
-obsidian property:read file=笔记 key=status
+obsidian properties file=Note
+obsidian property:set file=Note key=status value=done
+obsidian property:read file=Note key=status
 ```
 
-### 链接
+### Links
 
 ```bash
-obsidian backlinks file=笔记      # 反向链接
-obsidian links file=笔记          # 出链
-obsidian orphans                  # 孤立笔记
+obsidian backlinks file=Note      # Backlinks
+obsidian links file=Note          # Outgoing links
+obsidian orphans                  # Orphaned notes
 ```
 
-## 多 Vault 支持
+## Multi-Vault Support
 
 ```bash
-obsidian vaults                   # 列出所有 vault
-obsidian vault="Work" daily       # 指定 vault
+obsidian vaults                   # List all vaults
+obsidian vault="Work" daily       # Target specific vault
 ```
 
-## 参数说明
+## Parameters
 
-- `file=<name>` - 按文件名匹配（像 wikilink）
-- `path=<path>` - 精确路径（如 `folder/note.md`）
-- `content=<text>` - 内容，`\n` 换行，`\t` 制表符
-- `--copy` - 复制输出到剪贴板
-- `open` - 创建后打开文件
+- `file=<name>` - Match by filename (like wikilinks)
+- `path=<path>` - Exact path (e.g., `folder/note.md`)
+- `content=<text>` - Content, use `\n` for newline, `\t` for tab
+- `--copy` - Copy output to clipboard
+- `open` - Open file after creation
 
-## 与社区版 CLI 的区别
+## vs Community CLI
 
-| 功能 | 官方 CLI | 社区版 (yakitrak) |
-|------|---------|------------------|
+| Feature | Official CLI | Community (yakitrak) |
+|---------|-------------|---------------------|
 | Daily Notes | ✅ | ❌ |
 | Tasks | ✅ | ❌ |
 | Tags | ✅ | ❌ |
 | Templates | ✅ | ❌ |
-| Properties | ✅ | ❌ |
-| 需要 Obsidian 运行 | ✅ | ❌ |
-| 需要 Catalyst | ✅ | ❌ |
+| Requires Obsidian running | ✅ | ❌ |
+| Requires Catalyst | ✅ | ❌ |
 
-## 备选方案
+## Alternative: Direct File Editing
 
-如果 Obsidian 未运行，可以直接编辑 .md 文件：
+If Obsidian is not running, you can directly edit .md files:
 
 ```bash
-# Vault 就是普通文件夹
-echo "# 标题" > "/path/to/vault/新笔记.md"
-cat "/path/to/vault/笔记.md"
+# Vault is just a folder
+echo "# Title" > "/path/to/vault/NewNote.md"
+cat "/path/to/vault/Note.md"
 ```
 
-## 故障排除
+## Troubleshooting
 
-### 命令找不到
+### Command not found
 
 ```bash
-# 检查 PATH
+# Check PATH
 which obsidian
 
-# 如果找不到，手动添加
+# If not found, manually add
 export PATH="$PATH:/Applications/Obsidian.app/Contents/MacOS"
 ```
 
-### Obsidian 未运行
+### Obsidian not running
 
-CLI 需要 Obsidian 运行。第一个命令会自动启动 Obsidian。
+CLI requires Obsidian to be running. The first command will auto-launch Obsidian.
 
-## 注意事项
+## Notes
 
-- **Early Access**: 命令语法可能变化
-- **Obsidian 必须运行**: CLI 通过 IPC 通信
-- **macOS 专用**: 目前仅支持 macOS
+- **Early Access**: Command syntax may change
+- **Obsidian must be running**: CLI communicates via IPC
+- **macOS only**: Currently supports macOS only
+
+---
+
+## 中文说明
+
+完整的 Obsidian 官方 CLI 集成，支持日记、任务、标签、模板等功能。
+
+**前置条件**：
+- Obsidian 1.12+ (Early Access)
+- Catalyst license（付费支持者）
+- macOS 系统
+
+**安装**：设置 → 通用 → 启用"命令行界面" → 注册到 PATH
+
+**文档**：https://help.obsidian.md/cli

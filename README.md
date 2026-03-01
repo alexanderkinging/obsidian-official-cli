@@ -1,78 +1,103 @@
 # Obsidian Official CLI Skill
 
-让 AI 助手通过 Obsidian 官方 CLI 管理你的笔记。
+Let your AI assistant manage Obsidian notes through the official CLI.
 
-## 这是什么？
+## What is this?
 
-这个 skill 让 OpenClaw 能够：
-- 📝 创建和编辑 Obsidian 笔记
-- 📅 管理 Daily Notes（日记）
-- 🔍 搜索笔记内容
-- 🏷️ 查看标签和任务
-- 📎 使用模板创建笔记
+This skill enables OpenClaw to:
+- 📝 Create and edit Obsidian notes
+- 📅 Manage Daily Notes
+- 🔍 Search note content
+- 🏷️ View tags and tasks
+- 📎 Create notes from templates
 
-## 前置条件
+## Prerequisites
 
-⚠️ **需要 Obsidian Catalyst license**
+⚠️ **Requires Obsidian Catalyst license**
 
-1. Obsidian 1.12 或更高版本（Early Access）
-2. Catalyst license（付费支持者）
-3. macOS 系统
+1. Obsidian 1.12 or higher (Early Access)
+2. Catalyst license (paid supporter)
+3. macOS system
 
-## 安装步骤
+## Installation
 
-### 1. 启用 Obsidian CLI
+### 1. Enable Obsidian CLI
 
-1. 打开 Obsidian
-2. 设置 → 通用 → 命令行界面
-3. 启用并点击「注册到 PATH」
-4. 重启终端
+1. Open Obsidian
+2. Settings → General → Command line interface
+3. Enable and click "Register to PATH"
+4. Restart terminal
 
-### 2. 安装 Skill
+### 2. Install Skill
 
 ```bash
 clawhub install obsidian-official-cli
 ```
 
-### 3. 验证
+### 3. Verify
 
 ```bash
 obsidian help
 ```
 
-## 使用示例
+## Usage Examples
 
-安装后，你可以这样和 AI 助手对话：
+After installation, you can talk to your AI assistant like:
 
-- "帮我创建一个会议记录笔记"
-- "把这篇文章保存到 Obsidian"
-- "搜索我笔记里关于 AI 的内容"
-- "在今天的日记里添加一个待办事项"
-- "列出我所有的标签"
+- "Create a meeting notes"
+- "Save this article to Obsidian"
+- "Search my notes about AI"
+- "Add a todo to today's daily note"
+- "List all my tags"
 
-## 与社区版的区别
+## vs Community Version
 
-ClawHub 上还有一个 `obsidian` skill（by steipete），使用的是社区版 CLI。
+There's another `obsidian` skill on ClawHub (by steipete) using community CLI.
 
-| | 本 Skill (官方 CLI) | obsidian (社区版) |
+| | This Skill (Official) | obsidian (Community) |
 |---|---|---|
 | Daily Notes | ✅ | ❌ |
 | Tasks/Tags | ✅ | ❌ |
 | Templates | ✅ | ❌ |
-| 需要 Catalyst | ✅ | ❌ |
-| 需要 Obsidian 运行 | ✅ | ❌ |
+| Requires Catalyst | ✅ | ❌ |
+| Requires Obsidian running | ✅ | ❌ |
 
-如果你没有 Catalyst license，请使用社区版。
+If you don't have Catalyst license, use the community version.
 
-## 文档
+## Documentation
 
-- [Obsidian CLI 官方文档](https://help.obsidian.md/cli)
+- [Obsidian CLI Official Docs](https://help.obsidian.md/cli)
 - [Catalyst License](https://help.obsidian.md/catalyst)
 
-## 作者
+## Author
 
-由 OpenClaw 社区创建。
+Created by OpenClaw community.
 
 ## License
 
 MIT
+
+---
+
+## 中文说明
+
+让 AI 助手通过 Obsidian 官方 CLI 管理你的笔记。
+
+**功能**：
+- 📝 创建和编辑笔记
+- 📅 管理 Daily Notes（日记）
+- 🔍 搜索笔记内容
+- 🏷️ 查看标签和任务
+- 📎 使用模板创建笔记
+
+**前置条件**：
+- Obsidian 1.12+ (Early Access)
+- Catalyst license（付费支持者）
+- macOS 系统
+
+**安装**：
+```bash
+clawhub install obsidian-official-cli
+```
+
+**文档**：https://help.obsidian.md/cli

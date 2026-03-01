@@ -17,6 +17,19 @@ metadata:
 
 **Official Obsidian CLI (v1.12+)** - Complete documentation of all 115 commands.
 
+## About This Skill
+
+This OpenClaw skill provides complete access to Obsidian's official CLI, enabling AI agents to automate note-taking, task management, knowledge organization, and workspace customization.
+
+**Key capabilities:**
+- 📝 Automate daily journals and meeting notes
+- ✅ Manage tasks across your vault
+- 🔍 Search and organize knowledge
+- 🗄️ Work with Obsidian databases
+- 🎨 Customize themes, plugins, and workspaces
+
+**For complete use cases and OpenClaw integration tips, see [README.md](README.md).**
+
 ## Prerequisites
 
 - **Obsidian 1.12+** (Early Access)

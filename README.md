@@ -26,28 +26,48 @@ This OpenClaw skill provides **complete access to Obsidian's official CLI** (v1.
 
 ## Installation
 
-### 1. Get Catalyst License
+### Via Homebrew (Recommended) 🍺
 
-Visit https://obsidian.md/pricing and purchase Catalyst ($25 one-time).
+```bash
+# Add tap
+brew tap alexanderkinging/tap
 
-### 2. Install Skill
+# Install
+brew install obsidian-cli-helper
+
+# Test
+obs-helper help
+```
+
+### Via ClawHub (OpenClaw)
 
 ```bash
 clawhub install obsidian-cli-official
 ```
 
-### 3. Enable CLI in Obsidian
+### Manual Setup
+
+### 1. Get Catalyst License
+
+Visit https://obsidian.md/pricing and purchase Catalyst ($25 one-time).
+
+### 2. Enable CLI in Obsidian
 
 Settings → General → Enable CLI
 
-### 4. Add to PATH
+### 3. Add to PATH
 
 ```bash
 echo 'export PATH="$PATH:/Applications/Obsidian.app/Contents/MacOS"' >> ~/.zprofile
 source ~/.zprofile
 ```
 
-### 5. Test
+### 4. Test
+
+```bash
+obsidian version
+obsidian vault
+```
 
 ```bash
 obsidian version

@@ -1,5 +1,5 @@
 ---
-name: obsidian-catalyst-cli
+name: obsidian-cli-official
 description: |
   Complete official Obsidian CLI reference (v1.12+). All 115 commands documented.
   Covers files, daily notes, search, tasks, tags, properties, links, bookmarks, 

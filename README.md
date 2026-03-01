@@ -40,7 +40,7 @@ Visit https://obsidian.md/pricing and purchase Catalyst ($25 one-time).
 ### 2. Install Skill
 
 ```bash
-clawhub install obsidian-catalyst-cli
+clawhub install obsidian-cli-official
 ```
 
 ### 3. Enable CLI in Obsidian
@@ -110,25 +110,6 @@ obsidian eval code="app.vault.getFiles().length"
 
 See [SKILL.md](SKILL.md) for all 115 commands with full parameter documentation.
 
-## Official vs Community CLI
-
-| Feature | Official CLI | Community CLI (yakitrak) |
-|---------|--------------|--------------------------|
-| **Daily Notes** | ✅ Full support | ❌ Manual file editing |
-| **Tasks** | ✅ Toggle, filter | ❌ Manual editing |
-| **Tags** | ✅ Count, sort | ❌ Manual parsing |
-| **Properties** | ✅ Read, set, remove | ❌ Manual YAML |
-| **Bookmarks** | ✅ Full support | ❌ Not available |
-| **Bases** | ✅ Query, create | ❌ Not available |
-| **History** | ✅ Versions, restore | ❌ Not available |
-| **Sync** | ✅ Control, history | ❌ Not available |
-| **Publish** | ✅ Site, status, add* | ❌ Not available |
-| **Plugins** | ✅ Install, manage | ❌ Not available |
-| **Developer Tools** | ✅ DevTools, eval | ❌ Not available |
-| **Requires Obsidian running** | ✅ Yes (IPC) | ❌ No |
-| **Requires Catalyst** | ✅ Yes ($25) | ❌ No |
-| **Requires Publish** | ⚠️ For publish:* only ($8/mo) | ❌ N/A |
-
 ## Troubleshooting
 
 ### "Cannot connect to Obsidian"
@@ -160,29 +141,12 @@ obsidian vault="Notes" search query="test"
 - Without subscription: `Error: Command "publish:status" not found`
 - Subscribe at: https://obsidian.md/publish
 
-## Alternative: Direct File Editing
-
-If you don't have Catalyst license, you can still work with Obsidian vaults by editing files directly:
-
-```bash
-# Read note
-cat ~/Documents/Obsidian\ Vault/note.md
-
-# Append to daily note
-echo "- [ ] Task" >> ~/Documents/Obsidian\ Vault/Daily/2026-03-01.md
-
-# Search
-grep -r "keyword" ~/Documents/Obsidian\ Vault/
-```
-
-But you'll miss: tasks toggle, properties, bookmarks, bases, history, sync, publish, plugins, etc.
-
 ## Resources
 
 - **Official Docs**: https://help.obsidian.md/cli
 - **Catalyst License**: https://obsidian.md/pricing
 - **GitHub**: https://github.com/alexanderkinging/obsidian-official-cli
-- **ClawHub**: https://clawhub.ai/obsidian-catalyst-cli
+- **ClawHub**: https://clawhub.ai/obsidian-cli-official
 
 ---
 
@@ -207,7 +171,7 @@ But you'll miss: tasks toggle, properties, bookmarks, bases, history, sync, publ
 ### 安装
 
 ```bash
-clawhub install obsidian-catalyst-cli
+clawhub install obsidian-cli-official
 ```
 
 ### 配置

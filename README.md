@@ -39,10 +39,10 @@ clawhub install obsidian-cli-official
 brew tap alexanderkinging/tap
 
 # Install
-brew install obsidian-cli-helper
+brew install obsidian-cli-official
 
 # Test
-obs-helper help
+obs help
 ```
 
 ### Manual Setup
@@ -424,7 +424,7 @@ clawhub install obsidian-cli-official
 
 **通过 Homebrew（macOS/Linux）：**
 ```bash
-brew install alexanderkinging/tap/obsidian-cli-helper
+brew install alexanderkinging/tap/obsidian-cli-official
 ```
 
 ### 配置

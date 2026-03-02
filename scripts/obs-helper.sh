@@ -1,6 +1,6 @@
 #!/bin/bash
-# Obsidian CLI Helper for AI Agents
-# Usage: obs-helper <action> [args...]
+# Obsidian CLI Wrapper for AI Agents
+# Usage: obs <action> [args...]
 
 set -e
 
@@ -60,9 +60,9 @@ case "$ACTION" in
     
     help)
         cat << 'EOF'
-Obsidian CLI Helper for AI Agents
+Obsidian CLI Wrapper for AI Agents
 
-Usage: obs-helper <action> [args...]
+Usage: obs <action> [args...]
 
 Actions:
   daily                    Open today's daily note
@@ -75,12 +75,12 @@ Actions:
   help                     Show this help
 
 Examples:
-  obs-helper daily
-  obs-helper daily-add "## Meeting Notes\n- Discussed project timeline"
-  obs-helper note-create "Ideas" "# New Ideas\n\n- Idea 1"
-  obs-helper search "project"
-  obs-helper tasks
-  obs-helper task-toggle 3
+  obs daily
+  obs daily-add "## Meeting Notes\n- Discussed project timeline"
+  obs note-create "Ideas" "# New Ideas\n\n- Idea 1"
+  obs search "project"
+  obs tasks
+  obs task-toggle 3
 
 Full documentation:
 https://github.com/alexanderkinging/obsidian-official-cli
@@ -89,7 +89,7 @@ EOF
     
     *)
         echo "Unknown action: $ACTION"
-        echo "Run 'obs-helper help' for usage"
+        echo "Run 'obs help' for usage"
         exit 1
         ;;
 esac

@@ -10,16 +10,6 @@ metadata:
     requires:
       bins: ["obsidian"]
     platform: ["macos", "windows", "linux"]
-    install:
-      - id: "brew-macos"
-        kind: "brew"
-        formula: "alexanderkinging/tap/obsidian-cli-helper"
-        bins: ["obs-helper"]
-        label: "Install helper (macOS)"
-      - id: "manual"
-        kind: "manual"
-        label: "Manual setup (all platforms)"
-        url: "https://github.com/alexanderkinging/obsidian-official-cli#installation"
 ---
 
 # Obsidian Official CLI

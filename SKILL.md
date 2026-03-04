@@ -14,7 +14,7 @@ metadata:
 
 # Obsidian Official CLI
 
-Official command-line interface for Obsidian (v1.12+). 110 commands.
+Official command-line interface for Obsidian (v1.12+). 115 commands.
 
 ## Prerequisites
 
@@ -117,7 +117,7 @@ obsidian dev:screenshot path=screenshot.png         # Screenshot
 obsidian plugin:reload id=my-plugin                # Reload plugin
 ```
 
-## All Commands (110 total)
+## All Commands (115 total)
 
 ### General (4)
 - `help` - Show help / help for specific command
@@ -182,7 +182,7 @@ obsidian plugin:reload id=my-plugin                # Reload plugin
 - `bookmarks` - List bookmarks
 - `bookmark` - Add a bookmark
 
-### Bases / Database (3)
+### Bases / Database (4)
 - `bases` - List all base files
 - `base:views` - List views in a base
 - `base:create` - Create a new item in a base
@@ -199,7 +199,7 @@ obsidian plugin:reload id=my-plugin                # Reload plugin
 - `hotkeys` - List hotkeys
 - `hotkey` - Get hotkey for a command
 
-### Tabs & Workspaces (5)
+### Tabs & Workspaces (7)
 - `tabs` - List open tabs
 - `tab:open` - Open a new tab
 - `workspace` - Show workspace tree
@@ -216,7 +216,7 @@ obsidian plugin:reload id=my-plugin                # Reload plugin
 - `history:restore` - Restore a file history version
 - `history:open` - Open file recovery
 
-### Sync (8)
+### Sync (7)
 - `sync` - Pause or resume sync (on/off)
 - `sync:status` - Show sync status
 - `sync:history` - List sync version history

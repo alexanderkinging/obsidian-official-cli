@@ -66,7 +66,7 @@ obsidian tasks
 obsidian property:set name="status" value="done" file="Note"
 
 # Read property
-obsidian property:get name="status" file="Note"
+obsidian property:read name="status" file="Note"
 
 # Remove property
 obsidian property:remove name="status" file="Note"
@@ -100,19 +100,19 @@ obsidian unresolved
 
 ## Helper Script
 
-For easier usage, use the wrapper script:
+For easier usage, use the `obs` wrapper:
 
 ```bash
-# Install
-curl -o ~/bin/obs-helper https://raw.githubusercontent.com/alexanderkinging/obsidian-official-cli/master/scripts/obs-helper.sh
-chmod +x ~/bin/obs-helper
+# Install via Homebrew
+brew tap alexanderkinging/tap
+brew install obsidian-cli-official
 
 # Usage
-obs-helper daily
-obs-helper daily-add "## Tasks\n- [ ] Review code"
-obs-helper note-create "Ideas" "# New Ideas"
-obs-helper search "keyword"
-obs-helper tasks
+obs daily
+obs daily:append content="## Tasks\n- [ ] Review code"
+obs create name="Ideas" content="# New Ideas"
+obs search query="keyword"
+obs tasks
 ```
 
 ## Common Patterns

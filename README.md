@@ -18,8 +18,7 @@ This OpenClaw skill provides **complete access to Obsidian's official CLI** (v1.
 
 ## Prerequisites
 
-- **Obsidian 1.12+** (Early Access)
-- **Catalyst license** (paid supporter - $25 one-time)
+- **Obsidian 1.12+** (free, public release)
 - **Platform**: macOS, Windows, or Linux
 - **Obsidian must be running** (CLI connects via IPC)
 - **Obsidian Publish subscription** (optional, $8/month for publish commands)
@@ -49,22 +48,18 @@ obs help
 
 #### macOS
 
-**1. Get Catalyst License**
-
-Visit https://obsidian.md/pricing and purchase Catalyst ($25 one-time).
-
-**2. Enable CLI in Obsidian**
+**1. Enable CLI in Obsidian**
 
 Settings → General → Enable CLI
 
-**3. Add to PATH**
+**2. Add to PATH**
 
 ```bash
 echo 'export PATH="$PATH:/Applications/Obsidian.app/Contents/MacOS"' >> ~/.zprofile
 source ~/.zprofile
 ```
 
-**4. Test**
+**3. Test**
 
 ```bash
 obsidian version
@@ -75,15 +70,11 @@ obsidian vault
 
 #### Windows
 
-**1. Get Catalyst License**
-
-Visit https://obsidian.md/pricing and purchase Catalyst ($25 one-time).
-
-**2. Enable CLI in Obsidian**
+**1. Enable CLI in Obsidian**
 
 Settings → General → Enable CLI
 
-**3. Add to PATH**
+**2. Add to PATH**
 
 **Option A: System Environment Variables**
 1. Press `Win + X` → System → Advanced system settings
@@ -102,7 +93,7 @@ $env:PATH += ";$env:LOCALAPPDATA\Obsidian"
 . $PROFILE
 ```
 
-**4. Test**
+**3. Test**
 
 ```powershell
 obsidian version
@@ -113,15 +104,11 @@ obsidian vault
 
 #### Linux
 
-**1. Get Catalyst License**
-
-Visit https://obsidian.md/pricing and purchase Catalyst ($25 one-time).
-
-**2. Enable CLI in Obsidian**
+**1. Enable CLI in Obsidian**
 
 Settings → General → Enable CLI
 
-**3. Add to PATH**
+**2. Add to PATH**
 
 **Snap:**
 ```bash
@@ -147,7 +134,7 @@ echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-**4. Test**
+**3. Test**
 
 ```bash
 obsidian version
@@ -385,7 +372,7 @@ obsidian vault="Notes" search query="test"
 ## Resources
 
 - **Official Docs**: https://help.obsidian.md/cli
-- **Catalyst License**: https://obsidian.md/pricing
+- **Obsidian Download**: https://obsidian.md/download
 - **GitHub**: https://github.com/alexanderkinging/obsidian-official-cli
 - **ClawHub**: https://clawhub.ai/obsidian-cli-official
 
@@ -409,8 +396,7 @@ obsidian vault="Notes" search query="test"
 
 ### 前置条件
 
-- Obsidian 1.12+ (Early Access)
-- Catalyst 许可证（$25 一次性付费）
+- Obsidian 1.12+（免费公开版本）
 - 平台：macOS、Windows 或 Linux
 - Obsidian 必须运行中
 - Obsidian Publish 订阅（可选，$8/月，用于 publish 命令）

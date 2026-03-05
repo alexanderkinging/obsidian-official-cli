@@ -18,7 +18,7 @@ Official command-line interface for Obsidian (v1.12+). 115 commands.
 
 ## Prerequisites
 
-- **Obsidian 1.12+** with Catalyst license ($25 one-time)
+- **Obsidian 1.12+** (free, public release since v1.12)
 - **Obsidian must be running** (CLI connects via IPC)
 - **Enable CLI**: Settings → General → Enable CLI
 
@@ -304,7 +304,7 @@ obsidian plugin:reload id=my-plugin                # Reload plugin
 ## 中文说明
 
 ### 前置条件
-- Obsidian 1.12+ 需要 Catalyst 许可证（$25）
+- Obsidian 1.12+（免费公开版本）
 - Obsidian 必须运行中
 - 启用 CLI：设置 → 通用 → 启用 CLI
 
